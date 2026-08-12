@@ -1,0 +1,10 @@
+{
+  "description": "Engage Pakistani teens with a gamified cyber awareness platform offering interactive scenarios, anonymous issue reporting, and youth-focused resources.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
