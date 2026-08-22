@@ -60,12 +60,53 @@ const videos = [
 ]
 
 const helplines = [
-  { name: 'N-CERT Pakistan', detail: 'ncert.gov.pk · incident@ncert.gov.pk', sub: 'Cyber incident reporting — 24/7', color: '#00D4FF', emoji: '🛡' },
-  { name: 'FIA Cyber Crime Wing', detail: 'Helpline: 9911', sub: 'Online fraud, blackmail, hacking — 24/7', color: '#9B30FF', emoji: '⚖' },
-  { name: 'Digital Rights Foundation', detail: 'Cyber Harassment Helpline: 0800-39393', sub: 'Free · Anonymous · Available 8am–8pm', color: '#FF6B9D', emoji: '💙' },
-  { name: 'Umang Helpline', detail: '0317-4288665', sub: 'Youth mental health & crisis support — 9am–9pm', color: '#FF8C42', emoji: '🌱' },
-  { name: 'Child Protection & Welfare Bureau', detail: '1121', sub: 'Free · Confidential · For under-18s', color: '#FFD700', emoji: '👶' },
-  { name: 'PTA Complaint Center', detail: '0800-55055 · pta.gov.pk/complaints', sub: 'Platform abuse, illegal content, fraud', color: '#00FF88', emoji: '📋' },
+  { 
+    name: 'N-CERT Pakistan', 
+    links: [
+      { text: 'www.pkcert.gov.pk', href: 'https://www.pkcert.gov.pk' },
+      { text: 'cert@pkcert.gov.pk', href: 'mailto:cert@pkcert.gov.pk' }
+    ],
+    sub: 'Cyber incident reporting — 24/7', color: '#00D4FF', emoji: '🛡' 
+  },
+  { 
+    name: 'NCCIA (National Cyber Crime Investigation Agency)', 
+    links: [
+      { text: 'Helpline: 051-9106691', href: 'tel:051-9106691' },
+      { text: 'Website: complaint.fia.gov.pk', href: 'https://complaint.fia.gov.pk' },
+      { text: 'Email: helpdesk@nr3c.gov.pk', href: 'mailto:helpdesk@nr3c.gov.pk' }
+    ],
+    sub: 'Online fraud, blackmail, hacking — 24/7', color: '#9B30FF', emoji: '⚖' 
+  },
+  { 
+    name: 'Digital Rights Foundation', 
+    links: [
+      { text: 'Helpline: 0800-39393', href: 'tel:0800-39393' },
+      { text: 'Website: digitalrightsfoundation.pk', href: 'https://digitalrightsfoundation.pk' }
+    ],
+    sub: 'Free · Anonymous · Available 8am–8pm', color: '#FF6B9D', emoji: '💙' 
+  },
+  { 
+    name: 'Umang Helpline', 
+    links: [
+      { text: 'Helpline: 0317-4288665', href: 'tel:0317-4288665' }
+    ],
+    sub: 'Youth mental health & crisis support — 9am–9pm', color: '#FF8C42', emoji: '🌱' 
+  },
+  { 
+    name: 'Child Protection & Welfare Bureau', 
+    links: [
+      { text: 'Helpline: 1121', href: 'tel:1121' }
+    ],
+    sub: 'Free · Confidential · For under-18s', color: '#FFD700', emoji: '👶' 
+  },
+  { 
+    name: 'PTA Complaint Center', 
+    links: [
+      { text: 'Helpline: 0800-55055', href: 'tel:0800-55055' },
+      { text: 'Website: pta.gov.pk/complaints', href: 'https://pta.gov.pk/complaints' }
+    ],
+    sub: 'Platform abuse, illegal content, fraud', color: '#00FF88', emoji: '📋' 
+  },
 ]
 
 const gamingTips = [
@@ -194,124 +235,23 @@ export default function Resources({ user, onUserUpdate }: ResourcesProps) {
 
         {/* Articles */}
         {activeTab === 'articles' && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 animate-fade-in">
-            {articles.map((a) => (
-              <div
-                key={a.title}
-                className="glass rounded-xl overflow-hidden group cursor-pointer transition-all duration-300 hover:scale-[1.02]"
-                style={{ border: `1px solid rgba(${hexToRgb(a.tagColor)}, 0.15)` }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `0 0 24px rgba(${hexToRgb(a.tagColor)}, 0.15)`
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = 'none'
-                }}
-              >
-                <div
-                  className="h-24 flex items-center justify-center text-5xl"
-                  style={{
-                    background: `linear-gradient(135deg, rgba(${hexToRgb(a.tagColor)}, 0.12), rgba(10,36,99,0.6))`,
-                    borderBottom: `1px solid rgba(${hexToRgb(a.tagColor)}, 0.15)`,
-                  }}
-                >
-                  {a.emoji}
-                </div>
-                <div className="p-4">
-                  <div
-                    className="inline-block px-2 py-0.5 rounded text-xs font-bold mb-3"
-                    style={{
-                      background: `rgba(${hexToRgb(a.tagColor)}, 0.12)`,
-                      border: `1px solid rgba(${hexToRgb(a.tagColor)}, 0.3)`,
-                      color: a.tagColor,
-                      fontFamily: 'Orbitron, sans-serif',
-                      letterSpacing: '0.06em',
-                      fontSize: '0.6rem',
-                    }}
-                  >
-                    {a.tag}
-                  </div>
-                  <h3
-                    className="font-orbitron font-bold text-sm mb-2 leading-snug"
-                    style={{ color: '#E8F4FD' }}
-                  >
-                    {a.title}
-                  </h3>
-                  <p
-                    className="text-xs leading-relaxed mb-3"
-                    style={{ color: 'rgba(232,244,253,0.55)', fontFamily: 'Inter, sans-serif' }}
-                  >
-                    {a.desc}
-                  </p>
-                  <div
-                    className="flex items-center justify-between text-xs"
-                    style={{ color: 'rgba(232,244,253,0.35)', fontFamily: 'Inter, sans-serif' }}
-                  >
-                    <span>{a.readTime}</span>
-                    <span style={{ color: a.tagColor }}>Read →</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="animate-fade-in glass rounded-xl p-8 text-center" style={{ border: '1px solid rgba(0,212,255,0.2)' }}>
+            <div className="text-5xl mb-4">📖</div>
+            <h2 className="font-orbitron font-bold text-xl mb-2" style={{ color: '#00D4FF' }}>Articles Coming Soon!</h2>
+            <p className="text-sm" style={{ color: 'rgba(232,244,253,0.7)', fontFamily: 'Inter, sans-serif' }}>
+              We're preparing helpful guides for you. Check back later!
+            </p>
           </div>
         )}
 
         {/* Videos */}
         {activeTab === 'videos' && (
-          <div className="grid sm:grid-cols-2 gap-5 animate-fade-in">
-            {videos.map((v) => (
-              <div
-                key={v.title}
-                className="glass rounded-xl overflow-hidden cursor-pointer group transition-all duration-300 hover:scale-[1.02]"
-                style={{ border: `1px solid rgba(${hexToRgb(v.color)}, 0.2)` }}
-              >
-                <div
-                  className="h-36 flex items-center justify-center relative"
-                  style={{
-                    background: `linear-gradient(135deg, rgba(${hexToRgb(v.color)}, 0.15), rgba(10,36,99,0.7))`,
-                  }}
-                >
-                  <div className="text-5xl">{v.emoji}</div>
-                  <div
-                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{ background: 'rgba(0,0,0,0.4)' }}
-                  >
-                    <div
-                      className="w-14 h-14 rounded-full flex items-center justify-center"
-                      style={{
-                        background: v.color,
-                        boxShadow: `0 0 24px rgba(${hexToRgb(v.color)}, 0.6)`,
-                      }}
-                    >
-                      <span style={{ color: '#0B132B', fontWeight: 'bold', fontSize: '1.2rem' }}>▶</span>
-                    </div>
-                  </div>
-                  <div
-                    className="absolute bottom-2 right-2 px-2 py-0.5 rounded text-xs font-bold"
-                    style={{
-                      background: 'rgba(0,0,0,0.7)',
-                      color: '#E8F4FD',
-                      fontFamily: 'Orbitron, sans-serif',
-                    }}
-                  >
-                    {v.duration}
-                  </div>
-                </div>
-                <div className="p-4">
-                  <h3
-                    className="font-orbitron font-bold text-sm mb-2 leading-snug"
-                    style={{ color: '#E8F4FD' }}
-                  >
-                    {v.title}
-                  </h3>
-                  <div
-                    className="text-xs"
-                    style={{ color: 'rgba(232,244,253,0.4)', fontFamily: 'Inter, sans-serif' }}
-                  >
-                    {v.views} views
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="animate-fade-in glass rounded-xl p-8 text-center" style={{ border: '1px solid rgba(106,13,173,0.3)' }}>
+            <div className="text-5xl mb-4">▶</div>
+            <h2 className="font-orbitron font-bold text-xl mb-2" style={{ color: '#9B30FF' }}>Videos Coming Soon!</h2>
+            <p className="text-sm" style={{ color: 'rgba(232,244,253,0.7)', fontFamily: 'Inter, sans-serif' }}>
+              Watch our cyber safety videos soon. Stay tuned!
+            </p>
           </div>
         )}
 
@@ -336,20 +276,31 @@ export default function Resources({ user, onUserUpdate }: ResourcesProps) {
                   </div>
                   <div>
                     <div
-                      className="font-orbitron font-bold text-sm mb-1"
+                      className="font-orbitron font-bold text-sm mb-1.5"
                       style={{ color: h.color, letterSpacing: '0.06em' }}
                     >
                       {h.name}
                     </div>
                     <div
-                      className="text-sm font-semibold mb-0.5"
+                      className="text-sm font-semibold mb-1 flex flex-col gap-1"
                       style={{ color: '#E8F4FD', fontFamily: 'Inter, sans-serif' }}
                     >
-                      {h.detail}
+                      {h.links.map((link, i) => (
+                        <a
+                          key={i}
+                          href={link.href}
+                          target={link.href.startsWith('http') ? '_blank' : '_self'}
+                          rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                          className="hover:underline transition-all w-fit"
+                          style={{ color: 'rgba(232,244,253,0.9)' }}
+                        >
+                          {link.text}
+                        </a>
+                      ))}
                     </div>
                     <div
-                      className="text-xs"
-                      style={{ color: 'rgba(232,244,253,0.5)', fontFamily: 'Inter, sans-serif' }}
+                      className="text-xs mt-1.5 pt-1.5"
+                      style={{ color: 'rgba(232,244,253,0.5)', fontFamily: 'Inter, sans-serif', borderTop: '1px solid rgba(255,255,255,0.05)' }}
                     >
                       {h.sub}
                     </div>
@@ -360,7 +311,7 @@ export default function Resources({ user, onUserUpdate }: ResourcesProps) {
 
             {/* Emergency note */}
             <div
-              className="sm:col-span-2 rounded-xl p-4 text-center"
+              className="sm:col-span-2 rounded-xl p-5 text-center flex flex-col gap-3"
               style={{
                 background: 'rgba(255,68,68,0.1)',
                 border: '1px solid rgba(255,68,68,0.3)',
@@ -370,8 +321,15 @@ export default function Resources({ user, onUserUpdate }: ResourcesProps) {
                 className="text-sm font-semibold"
                 style={{ color: '#FF6B6B', fontFamily: 'Inter, sans-serif' }}
               >
-                🚨 If you are in immediate danger, call <strong>15</strong> (Police) or{' '}
-                <strong>1122</strong> (Emergency).
+                🚨 If you are in immediate danger, call <strong><a href="tel:15" className="hover:underline hover:text-white transition-colors">15</a></strong> (Police) or{' '}
+                <strong><a href="tel:1122" className="hover:underline hover:text-white transition-colors">1122</a></strong> (Emergency).
+              </p>
+              <p
+                className="text-xs opacity-90"
+                style={{ color: '#FF6B6B', fontFamily: 'Inter, sans-serif' }}
+              >
+                For immediate assistance in Punjab, girls can also contact the Sitara Helpline:{' '}
+                <a href="tel:1121" className="font-bold hover:underline hover:text-white transition-colors">1121</a> (available 24/7)
               </p>
             </div>
           </div>

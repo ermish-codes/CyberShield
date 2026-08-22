@@ -37,7 +37,7 @@ const incidents = [
 
 const needs = [
   { id: 'recover' as const, icon: '🔧', label: 'Recover my account or data', desc: 'Step-by-step help getting back what was taken' },
-  { id: 'report' as const, icon: '📋', label: 'Report it officially', desc: 'File a complaint with N-CERT, FIA, or the platform' },
+  { id: 'report' as const, icon: '📋', label: 'Report it officially', desc: 'File a complaint with N-CERT, NCCIA, or the platform' },
   { id: 'support' as const, icon: '💙', label: 'Talk to someone / get emotional support', desc: 'This is tough. Connect with a counselor or helpline' },
   { id: 'stay_safe' as const, icon: '🛡', label: 'Make sure I am safe now', desc: 'Lock down my accounts and protect myself going forward' },
 ]
@@ -57,8 +57,8 @@ const playbooks: Record<string, { title: string; intro: string; steps: string[];
       'Screenshot everything unusual for evidence',
     ],
     contacts: [
-      { name: 'N-CERT Pakistan', detail: 'Report: ncert.gov.pk | Email: incident@ncert.gov.pk', color: '#00D4FF' },
-      { name: 'FIA Cyber Crime Wing', detail: 'Helpline: 9911 | Website: fia.gov.pk/cybercrime', color: '#9B30FF' },
+      { name: 'N-CERT Pakistan', detail: 'Report: www.pkcert.gov.pk | Email: cert@pkcert.gov.pk', color: '#00D4FF' },
+      { name: 'NCCIA', detail: 'Helpline: 051-9106691 | Website: complaint.fia.gov.pk', color: '#9B30FF' },
     ],
   },
   account_hacked_stay_safe: {
@@ -75,7 +75,8 @@ const playbooks: Record<string, { title: string; intro: string; steps: string[];
       'Monitor your bank or mobile money accounts for unauthorized transactions',
     ],
     contacts: [
-      { name: 'N-CERT Pakistan', detail: 'ncert.gov.pk | 24/7 incident response', color: '#00D4FF' },
+      { name: 'N-CERT Pakistan', detail: 'www.pkcert.gov.pk | 24/7 incident response', color: '#00D4FF' },
+      { name: 'NCCIA', detail: 'Helpline: 051-9106691 | Website: complaint.fia.gov.pk', color: '#9B30FF' },
     ],
   },
   cyberbullying_recover: {
@@ -93,7 +94,8 @@ const playbooks: Record<string, { title: string; intro: string; steps: string[];
     ],
     contacts: [
       { name: 'Umang Helpline', detail: '0317-4288665 · Free · Urdu & English', color: '#FF6B9D' },
-      { name: 'N-CERT', detail: 'ncert.gov.pk — report cyberbullying incidents', color: '#00D4FF' },
+      { name: 'N-CERT', detail: 'www.pkcert.gov.pk — report cyberbullying incidents', color: '#00D4FF' },
+      { name: 'NCCIA', detail: 'Helpline: 051-9106691 | Website: complaint.fia.gov.pk', color: '#9B30FF' },
     ],
   },
   cyberbullying_support: {
@@ -110,6 +112,8 @@ const playbooks: Record<string, { title: string; intro: string; steps: string[];
     contacts: [
       { name: 'Umang Helpline', detail: '0317-4288665 · Available 9am-9pm · Free', color: '#FF6B9D' },
       { name: 'Rozan Counseling', detail: '051-2890505 · Islamabad · Free for youth', color: '#9B30FF' },
+      { name: 'N-CERT Pakistan', detail: 'Report: www.pkcert.gov.pk | Email: cert@pkcert.gov.pk', color: '#00D4FF' },
+      { name: 'NCCIA', detail: 'Helpline: 051-9106691 | Website: complaint.fia.gov.pk', color: '#9B30FF' },
     ],
   },
   sextortion_recover: {
@@ -121,13 +125,13 @@ const playbooks: Record<string, { title: string; intro: string; steps: string[];
       'Screenshot all messages and the account threatening you',
       'Block the account on every platform (this does not delete their copies, but stops further contact)',
       'Report to the platform — platforms remove this content quickly once reported',
-      'Contact N-CERT or FIA Cyber Crime Wing — they deal with this daily and will not judge you',
+      'Contact N-CERT or NCCIA — they deal with this daily and will not judge you',
       'Tell a parent or adult you trust — you need support and legal protection',
       'Know your rights: sharing intimate images without consent is a criminal offense in Pakistan under PECA 2016',
     ],
     contacts: [
-      { name: 'N-CERT Emergency', detail: 'ncert.gov.pk | incident@ncert.gov.pk', color: '#00D4FF' },
-      { name: 'FIA Cyber Crime (EMERGENCY)', detail: 'Helpline: 9911 · Available 24/7', color: '#FF6B6B' },
+      { name: 'N-CERT Emergency', detail: 'www.pkcert.gov.pk | cert@pkcert.gov.pk', color: '#00D4FF' },
+      { name: 'NCCIA (EMERGENCY)', detail: 'Helpline: 051-9106691 · helpdesk@nr3c.gov.pk', color: '#FF6B6B' },
       { name: 'Digital Rights Foundation', detail: 'Cyber Harassment Helpline: 0800-39393 · Free · Confidential', color: '#FF6B9D' },
     ],
   },
@@ -138,14 +142,15 @@ const playbooks: Record<string, { title: string; intro: string; steps: string[];
       'If you shared bank details or JazzCash/Easypaisa info — call your bank/wallet immediately to freeze the account',
       'Change your mobile banking password and PIN right now',
       'Screenshot everything: messages, payment receipts, screenshots of the fake website',
-      'File a complaint with FIA Cyber Crime Wing — they can sometimes trace and freeze fraudulent accounts',
+      'File a complaint with NCCIA — they can sometimes trace and freeze fraudulent accounts',
       'Report the scam number/account to PTA: pta.gov.pk/complaints',
       'Alert family members about the scam method so they do not fall victim',
       'Check if your personal info was leaked — change passwords on important accounts',
       'In future: verify ANY payment request or prize claim by calling the official number first',
     ],
     contacts: [
-      { name: 'FIA Cyber Crime Wing', detail: 'Helpline: 9911 | fia.gov.pk/cybercrime', color: '#9B30FF' },
+      { name: 'NCCIA', detail: 'Helpline: 051-9106691 | complaint.fia.gov.pk', color: '#9B30FF' },
+      { name: 'N-CERT Pakistan', detail: 'Report: www.pkcert.gov.pk | Email: cert@pkcert.gov.pk', color: '#00D4FF' },
       { name: 'PTA Complaint', detail: 'pta.gov.pk/complaints | 0800-55055', color: '#00D4FF' },
       { name: 'JazzCash Fraud', detail: '111-124-724 | Report within 24 hours', color: '#FF8C42' },
     ],
@@ -158,14 +163,15 @@ const playbooks: Record<string, { title: string; intro: string; steps: string[];
       'Do NOT delete the messages yet — they are evidence',
       'Screenshot all conversations and keep them somewhere safe',
       'Tell a parent, guardian, or school counselor — this is too important to handle alone',
-      'Contact N-CERT or FIA — online grooming and predatory behavior is a criminal offense',
+      'Contact N-CERT or NCCIA — online grooming and predatory behavior is a criminal offense',
       'If you feel unsafe at any time, call the emergency helpline Umang (0317-4288665)',
       'If the person knows where you live, contact local police immediately',
       'Be gentle with yourself — you were manipulated by an experienced adult. This is not your fault.',
     ],
     contacts: [
       { name: 'Umang Helpline', detail: '0317-4288665 · 24/7 for youth emergencies', color: '#FF6B9D' },
-      { name: 'FIA Cyber Crime', detail: '9911 · Report predatory behavior', color: '#FF6B6B' },
+      { name: 'NCCIA', detail: '051-9106691 · Report predatory behavior', color: '#FF6B6B' },
+      { name: 'N-CERT Pakistan', detail: 'Report: www.pkcert.gov.pk | Email: cert@pkcert.gov.pk', color: '#00D4FF' },
       { name: 'Child Protection & Welfare Bureau', detail: '1121 · Free · Confidential', color: '#FFD700' },
     ],
   },
@@ -184,7 +190,8 @@ const playbooks: Record<string, { title: string; intro: string; steps: string[];
     ],
     contacts: [
       { name: 'Digital Rights Foundation', detail: '0800-39393 · Privacy & image removal help', color: '#FF6B9D' },
-      { name: 'N-CERT', detail: 'ncert.gov.pk · Data breach reporting', color: '#00D4FF' },
+      { name: 'N-CERT', detail: 'www.pkcert.gov.pk · Data breach reporting', color: '#00D4FF' },
+      { name: 'NCCIA', detail: 'Helpline: 051-9106691 | complaint.fia.gov.pk', color: '#9B30FF' },
     ],
   },
 }
@@ -297,14 +304,14 @@ export default function Triage({ onNavigate, user, onUserUpdate }: TriageProps) 
                       step === s
                         ? 'linear-gradient(135deg, #00D4FF, #0099CC)'
                         : step > s
-                        ? 'rgba(46,204,113,0.3)'
-                        : 'rgba(10,36,99,0.5)',
+                          ? 'rgba(46,204,113,0.3)'
+                          : 'rgba(10,36,99,0.5)',
                     border:
                       step === s
                         ? '2px solid #00D4FF'
                         : step > s
-                        ? '2px solid rgba(46,204,113,0.6)'
-                        : '2px solid rgba(0,212,255,0.2)',
+                          ? '2px solid rgba(46,204,113,0.6)'
+                          : '2px solid rgba(0,212,255,0.2)',
                     color:
                       step === s ? '#0B132B' : step > s ? '#2ecc71' : 'rgba(232,244,253,0.4)',
                     boxShadow: step === s ? '0 0 16px rgba(0,212,255,0.4)' : 'none',
@@ -319,8 +326,8 @@ export default function Triage({ onNavigate, user, onUserUpdate }: TriageProps) 
                       step === s
                         ? '#00D4FF'
                         : step > s
-                        ? '#2ecc71'
-                        : 'rgba(232,244,253,0.3)',
+                          ? '#2ecc71'
+                          : 'rgba(232,244,253,0.3)',
                     letterSpacing: '0.06em',
                     fontSize: '0.6rem',
                   }}

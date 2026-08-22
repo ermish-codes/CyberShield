@@ -7,9 +7,10 @@ import Resources from './pages/Resources'
 import Auth from './pages/Auth'
 import Profile from './pages/Profile'
 import Splash from './pages/Splash'
+import GameZone from './pages/GameZone'
 import { getStoredUser, logOut, type UserProfile } from './lib/auth'
 
-type Page = 'landing' | 'game' | 'triage' | 'resources' | 'auth' | 'profile' | 'splash'
+type Page = 'landing' | 'game' | 'gamezone' | 'triage' | 'resources' | 'auth' | 'profile' | 'splash'
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('splash')
@@ -58,6 +59,7 @@ export default function App() {
       {currentPage === 'game' && (
         <Game onNavigate={navigate} user={user} onUserUpdate={handleUserUpdate} />
       )}
+      {currentPage === 'gamezone' && <GameZone />}
       {currentPage === 'triage' && (
         <Triage onNavigate={navigate} user={user} onUserUpdate={handleUserUpdate} />
       )}

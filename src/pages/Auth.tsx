@@ -311,7 +311,7 @@ export default function Auth({ onAuth, onBack }: AuthProps) {
             className="text-center text-xs mt-3"
             style={{ color: 'rgba(232,244,253,0.22)', fontFamily: 'Inter, sans-serif' }}
           >
-            🔒 Stored locally on your device only. N-CERT never sees your data.
+            🔒 Stored locally on your device only. We never sees your data.
           </p>
         </div>
       </div>

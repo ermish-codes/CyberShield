@@ -37,14 +37,39 @@ export const ALL_BADGES: Badge[] = [
 
 const STORAGE_KEY = 'cybershield_user'
 const USERS_KEY = 'cybershield_users'
+const SESSION_KEY = 'cybershield_session'
 
 export function getStoredUser(): UserProfile | null {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    return raw ? JSON.parse(raw) : null
+    const sessionRaw = localStorage.getItem(SESSION_KEY)
+    if (sessionRaw) {
+      const session = JSON.parse(sessionRaw)
+      if (Date.now() > session.expiry) {
+        logOut()
+        return null
+      }
+      const users = getAllUsers()
+      const user = users[session.email]
+      if (user) {
+        const { password: _pw, ...profile } = user
+        // Ensure the legacy active user key is also updated
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(profile))
+        return profile
+      }
+    } else {
+      // Fallback for old sessions without expiry
+      const raw = localStorage.getItem(STORAGE_KEY)
+      return raw ? JSON.parse(raw) : null
+    }
+    return null
   } catch {
     return null
   }
+}
+
+function setSession(email: string) {
+  const expiry = Date.now() + 7 * 24 * 60 * 60 * 1000 // 7 days
+  localStorage.setItem(SESSION_KEY, JSON.stringify({ email, expiry }))
 }
 
 export function saveUser(user: UserProfile) {
@@ -82,6 +107,7 @@ export function signUp(username: string, email: string, password: string, avatar
   users[email] = stored
   localStorage.setItem(USERS_KEY, JSON.stringify(users))
   saveUser(profile)
+  setSession(email)
   return profile
 }
 
@@ -92,11 +118,21 @@ export function logIn(email: string, password: string): UserProfile | string {
   if (found.password !== password) return 'Incorrect password.'
   const { password: _pw, ...profile } = found
   saveUser(profile)
+  setSession(email)
   return profile
 }
 
 export function logOut() {
   localStorage.removeItem(STORAGE_KEY)
+  localStorage.removeItem(SESSION_KEY)
+}
+
+export function resetPassword(email: string): string {
+  const users = getAllUsers()
+  if (!users[email]) {
+    return 'If this email is registered, a reset link will be sent.'
+  }
+  return 'Password reset link has been sent to your email.'
 }
 
 export function updateUserStats(

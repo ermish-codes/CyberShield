@@ -1,24 +1,37 @@
 import { useState } from 'react'
-import { signUp, logIn, AVATARS, type UserProfile } from '../lib/auth'
+import { signUp, logIn, resetPassword, AVATARS, type UserProfile } from '../lib/auth'
 
 interface SplashProps {
   onAuth: (user: UserProfile) => void
 }
 
 export default function Splash({ onAuth }: SplashProps) {
-  const [mode, setMode] = useState<'login' | 'signup'>('signup')
+  const [mode, setMode] = useState<'login' | 'signup' | 'forgot_password'>('signup')
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [selectedAvatar, setSelectedAvatar] = useState(AVATARS[0])
   const [error, setError] = useState('')
+  const [successMsg, setSuccessMsg] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError('')
+    setSuccessMsg('')
+
+    if (mode === 'forgot_password') {
+      if (!email.trim()) return setError('Enter your email to reset password.')
+      setLoading(true)
+      setTimeout(() => {
+        const msg = resetPassword(email.trim().toLowerCase())
+        setLoading(false)
+        setSuccessMsg(msg)
+      }, 600)
+      return
+    }
 
     if (mode === 'signup') {
       if (!username.trim()) return setError('Please choose a username.')
@@ -87,7 +100,7 @@ export default function Splash({ onAuth }: SplashProps) {
                 className="font-orbitron text-xs font-bold"
                 style={{ color: '#00D4FF', letterSpacing: '0.12em' }}
               >
-                N-CERT PAKISTAN
+                CyberShield PAKISTAN
               </span>
             </div>
             <div
@@ -158,17 +171,17 @@ export default function Splash({ onAuth }: SplashProps) {
               {(['login', 'signup'] as const).map((m) => (
                 <button
                   key={m}
-                  onClick={() => { setMode(m); setError('') }}
+                  onClick={() => { setMode(m); setError(''); setSuccessMsg(''); }}
                   className="flex-1 py-2.5 rounded-lg transition-all duration-200 font-orbitron font-bold text-xs"
                   style={{
                     letterSpacing: '0.1em',
                     background:
-                      mode === m
+                      mode === m || (m === 'login' && mode === 'forgot_password')
                         ? 'linear-gradient(135deg, rgba(0,212,255,0.22), rgba(0,212,255,0.08))'
                         : 'transparent',
-                    color: mode === m ? '#00D4FF' : 'rgba(232,244,253,0.4)',
-                    border: mode === m ? '1px solid rgba(0,212,255,0.3)' : '1px solid transparent',
-                    boxShadow: mode === m ? '0 0 12px rgba(0,212,255,0.15)' : 'none',
+                    color: mode === m || (m === 'login' && mode === 'forgot_password') ? '#00D4FF' : 'rgba(232,244,253,0.4)',
+                    border: mode === m || (m === 'login' && mode === 'forgot_password') ? '1px solid rgba(0,212,255,0.3)' : '1px solid transparent',
+                    boxShadow: mode === m || (m === 'login' && mode === 'forgot_password') ? '0 0 12px rgba(0,212,255,0.15)' : 'none',
                   }}
                 >
                   {m === 'login' ? 'LOG IN' : 'SIGN UP'}
@@ -233,39 +246,52 @@ export default function Splash({ onAuth }: SplashProps) {
                 placeholder="you@example.com"
               />
 
-              <div>
-                <label
-                  className="block font-orbitron font-bold text-xs mb-1.5"
-                  style={{ color: 'rgba(0,212,255,0.7)', letterSpacing: '0.08em' }}
-                >
-                  PASSWORD
-                </label>
-                <div className="relative">
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Min 6 characters"
-                    className="w-full rounded-xl px-4 py-3 pr-10 text-sm outline-none transition-all duration-200"
-                    style={{
-                      background: 'rgba(10,36,99,0.5)',
-                      border: '1.5px solid rgba(0,212,255,0.15)',
-                      color: '#E8F4FD',
-                      fontFamily: 'Inter, sans-serif',
-                    }}
-                    onFocus={(e) => (e.target.style.borderColor = 'rgba(0,212,255,0.5)')}
-                    onBlur={(e) => (e.target.style.borderColor = 'rgba(0,212,255,0.15)')}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword((s) => !s)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-sm"
-                    style={{ color: 'rgba(0,212,255,0.5)' }}
+              {mode !== 'forgot_password' && (
+                <div>
+                  <label
+                    className="block font-orbitron font-bold text-xs mb-1.5"
+                    style={{ color: 'rgba(0,212,255,0.7)', letterSpacing: '0.08em' }}
                   >
-                    {showPassword ? '🙈' : '👁'}
-                  </button>
+                    PASSWORD
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Min 6 characters"
+                      className="w-full rounded-xl px-4 py-3 pr-10 text-sm outline-none transition-all duration-200"
+                      style={{
+                        background: 'rgba(10,36,99,0.5)',
+                        border: '1.5px solid rgba(0,212,255,0.15)',
+                        color: '#E8F4FD',
+                        fontFamily: 'Inter, sans-serif',
+                      }}
+                      onFocus={(e) => (e.target.style.borderColor = 'rgba(0,212,255,0.5)')}
+                      onBlur={(e) => (e.target.style.borderColor = 'rgba(0,212,255,0.15)')}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((s) => !s)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-sm"
+                      style={{ color: 'rgba(0,212,255,0.5)' }}
+                    >
+                      {showPassword ? '🙈' : '👁'}
+                    </button>
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {mode === 'login' && (
+                <button
+                  type="button"
+                  onClick={() => { setMode('forgot_password'); setError(''); setSuccessMsg(''); }}
+                  className="text-xs w-full text-right hover:opacity-80 transition-opacity"
+                  style={{ color: 'rgba(0,212,255,0.7)', fontFamily: 'Inter, sans-serif' }}
+                >
+                  Forgot Password?
+                </button>
+              )}
 
               {mode === 'signup' && (
                 <Field
@@ -277,7 +303,7 @@ export default function Splash({ onAuth }: SplashProps) {
                 />
               )}
 
-              {/* Error */}
+              {/* Error and Success */}
               {error && (
                 <div
                   className="rounded-xl px-4 py-3 text-sm animate-shake"
@@ -291,6 +317,19 @@ export default function Splash({ onAuth }: SplashProps) {
                   {error}
                 </div>
               )}
+              {successMsg && (
+                <div
+                  className="rounded-xl px-4 py-3 text-sm animate-fade-in"
+                  style={{
+                    background: 'rgba(46,204,113,0.1)',
+                    border: '1px solid rgba(46,204,113,0.35)',
+                    color: '#2ecc71',
+                    fontFamily: 'Inter, sans-serif',
+                  }}
+                >
+                  {successMsg}
+                </div>
+              )}
 
               <button
                 type="submit"
@@ -300,6 +339,8 @@ export default function Splash({ onAuth }: SplashProps) {
               >
                 {loading ? (
                   <LoadingDots />
+                ) : mode === 'forgot_password' ? (
+                  'RESET PASSWORD'
                 ) : mode === 'login' ? (
                   '→ ENTER THE SHIELD'
                 ) : (
@@ -312,7 +353,7 @@ export default function Splash({ onAuth }: SplashProps) {
               className="text-center text-xs mt-3"
               style={{ color: 'rgba(232,244,253,0.22)', fontFamily: 'Inter, sans-serif' }}
             >
-              🔒 Stored locally on your device only. N-CERT never sees your data.
+              🔒 Stored locally on your device only. We never see your data.
             </p>
           </div>
         </div>

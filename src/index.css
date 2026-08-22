@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import 'tailwindcss';
 
 :root {
@@ -21,6 +21,20 @@
   --neon-purple: #6A0DAD;
   --cyber-blue: #0A2463;
   --navy: #0B132B;
+  
+  /* GameZone Design System */
+  --gz-bg: #0A0E1A;
+  --gz-panel: #121828;
+  --gz-panel-2: #0E1422;
+  --gz-line: #232B41;
+  --gz-text: #E7ECF5;
+  --gz-muted: #8B93AB;
+  --gz-primary: #7B61FF;
+  --gz-primary-dim: #4B3D9E;
+  --gz-safe: #33D6A6;
+  --gz-warn: #FFB84D;
+  --gz-danger: #FF5468;
+  --gz-stranger: #94A3B8;
 }
 
 * {
@@ -215,3 +229,23 @@ body {
   transition: width 0.4s ease;
   box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
 }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.animate-blink {
+  animation: blink 0.8s step-end infinite;
+}
+@keyframes pulse-glow-avatar {
+  0%, 100% { transform: scale(1); opacity: 1; filter: brightness(1); }
+  50% { transform: scale(1.05); opacity: 0.9; filter: brightness(1.2); }
+}
+.animate-pulse-glow {
+  animation: pulse-glow-avatar 1.5s ease-in-out infinite;
+}
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+.animate-fade-out { animation: fade-out 0.3s ease-in forwards; }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { UserProfile } from '../lib/auth'
 
-type Page = 'landing' | 'game' | 'triage' | 'resources' | 'profile' | 'auth' | 'splash'
+type Page = 'landing' | 'game' | 'gamezone' | 'triage' | 'resources' | 'profile' | 'auth' | 'splash'
 
 interface NavProps {
   currentPage: Page
@@ -14,6 +14,7 @@ export default function Nav({ currentPage, onNavigate, user }: NavProps) {
 
   const links: { label: string; page: Page }[] = [
     { label: 'Home', page: 'landing' },
+    { label: 'GameZone', page: 'gamezone' },
     { label: 'Play Game', page: 'game' },
     { label: 'Get Help', page: 'triage' },
     { label: 'Resources', page: 'resources' },

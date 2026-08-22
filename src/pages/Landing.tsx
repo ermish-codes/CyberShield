@@ -115,7 +115,7 @@ export default function Landing({ onNavigate }: LandingProps) {
                     className="font-orbitron text-xs font-bold"
                     style={{ color: '#00D4FF', letterSpacing: '0.12em' }}
                   >
-                    N-CERT PAKISTAN
+                    CyberShield PAKISTAN
                   </span>
                 </div>
                 <div
@@ -152,7 +152,7 @@ export default function Landing({ onNavigate }: LandingProps) {
                 className="text-base leading-relaxed mb-8 max-w-lg"
                 style={{ color: 'rgba(232,244,253,0.72)', fontFamily: 'Inter, sans-serif' }}
               >
-                Pakistan's first gamified cyber awareness platform — designed by N-CERT for
+                Pakistan's first gamified cyber awareness platform — designed for
                 teenagers and gamers who deserve to own the internet, not fear it.
               </p>
 
